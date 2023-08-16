@@ -6,6 +6,8 @@ import DoctoresScreen from '@screens/DoctoresScreen';
 const Tab = createBottomTabNavigator();
 const { width, height } = Dimensions.get('window')
 import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
+import PacientesScreen from '@screens/PacientesScreen';
+import { Ionicons } from '@expo/vector-icons';
 
 const BottomTabNavigator = () => {
   return (
@@ -14,6 +16,11 @@ const BottomTabNavigator = () => {
         <Tab.Screen name="HomeScreen" component={HomeScreen} options={{ 
           tabBarIcon: ({ color }) => (
             <Foundation name="home" size={30} color={color} />
+          ),
+         }} />
+        <Tab.Screen name="PacientesScreen" component={PacientesScreen} options={{ 
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="md-person" size={30} color={color} />
           ),
          }} />
         <Tab.Screen name="DoctoresScreen" component={DoctoresScreen} options={{
