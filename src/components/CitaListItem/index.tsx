@@ -1,0 +1,56 @@
+import { View, Text, TouchableOpacity } from 'react-native'
+import React from 'react'
+import styles from './styles'
+import { CitaListItemProps } from './types'
+import { useTheme } from 'react-native-paper'
+import { AntDesign } from '@expo/vector-icons';
+
+const CitaListItem = ({ inProgress }: CitaListItemProps) => {
+  const { colors } = useTheme();
+
+  return (
+    <TouchableOpacity
+      onPress={() => {}}
+      style={[styles.container, { backgroundColor: inProgress ? colors.primary : "#fff"  }]}
+    >
+      <View style={styles.citaContainer}>
+        <Text
+          style={[styles.citaTexto, inProgress ? { color: "#fff" } : null]}
+        >
+            Consulta general
+        </Text>
+        <Text
+          style={[
+            styles.verMasBotonTexto,
+            inProgress ? { color: "#fff", fontWeight: "400" } : null
+          ]}
+        >
+          Ver más información
+        </Text>
+      </View>
+      {false && (
+        <View style={styles.iconContainer}>
+          <AntDesign
+            name="checkcircle"
+            size={24}
+            color={inProgress ? "#fff" : colors.primary}
+          />
+        </View>
+      )}
+      <View style={styles.dateContainer}>
+        <Text
+          style={[styles.dateText, inProgress ? { color: "#fff" } : null]}
+        >
+          2 de agosto
+        </Text>
+        <Text
+          style={[styles.hourText, inProgress ? { color: "#fff" } : null]}
+        >
+          08:00 am
+        </Text>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+export default CitaListItem
