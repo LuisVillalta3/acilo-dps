@@ -1,11 +1,20 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { MaterialIcons, FontAwesome5, AntDesign, FontAwesome  } from '@expo/vector-icons';
-import styles from '@navigation/styles';
+import { View, Text, TouchableOpacity } from 'react-native';
+import React from 'react';
+import {
+  MaterialIcons,
+  FontAwesome5,
+  AntDesign,
+  FontAwesome
+} from '@expo/vector-icons';
+import styles from '@routes/BottomTabNavigator/styles';
 import { useTheme } from 'react-native-paper';
+import { PacienteCardProps } from './types';
 
-const PacienteCard = () => {
-  const { colors } = useTheme()
+const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
+  const { colors } = useTheme();
+  const navigationProps = {
+    pacienteID: 1
+  };
 
   return (
     <View style={styles.container}>
@@ -16,9 +25,13 @@ const PacienteCard = () => {
             <AntDesign name="eye" size={24} color={colors.primary} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <FontAwesome5 name="calendar-alt" size={24} color={colors.primary} />
+            <FontAwesome5
+              name="calendar-alt"
+              size={24}
+              color={colors.primary}
+            />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('PacienteFormScreen', navigationProps)}>
             <MaterialIcons name="edit" size={24} color={colors.primary} />
           </TouchableOpacity>
         </View>
@@ -35,7 +48,12 @@ const PacienteCard = () => {
       </View>
       <View>
         <TouchableOpacity style={styles.infoButton}>
-          <FontAwesome5 name="whatsapp-square" size={24} color={colors.primary} style={{ marginRight: 6 }} />
+          <FontAwesome5
+            name="whatsapp-square"
+            size={24}
+            color={colors.primary}
+            style={{ marginRight: 6 }}
+          />
           <Text style={styles.datosText}>7484-3233</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.infoButton}>
@@ -45,14 +63,14 @@ const PacienteCard = () => {
           <Text style={styles.datosText}>john.doe@email.com</Text>
         </TouchableOpacity>
         <View style={styles.infoButton}>
-          <View style={[styles.infoIcon, { alignItems: "center" }]}>
+          <View style={[styles.infoIcon, { alignItems: 'center' }]}>
             <FontAwesome5 name="map-marker-alt" size={24} color="#7F7F7F" />
           </View>
           <Text style={styles.datosText}>San Salvador, El Salvador</Text>
         </View>
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default PacienteCard
+export default Card;
