@@ -8,9 +8,13 @@ import {
 } from '@expo/vector-icons';
 import styles from '@routes/BottomTabNavigator/styles';
 import { useTheme } from 'react-native-paper';
+import { PacienteCardProps } from './types';
 
-const Card = () => {
+const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
   const { colors } = useTheme();
+  const navigationProps = {
+    pacienteID: 1
+  };
 
   return (
     <View style={styles.container}>
@@ -27,7 +31,7 @@ const Card = () => {
               color={colors.primary}
             />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('PacienteFormScreen', navigationProps)}>
             <MaterialIcons name="edit" size={24} color={colors.primary} />
           </TouchableOpacity>
         </View>

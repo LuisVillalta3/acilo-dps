@@ -25,27 +25,26 @@ const PacientesScreen = () => {
         </TouchableOpacity>
       </View>
       <ScrollView style={{ paddingHorizontal: 20 }}>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
+        <Card navigation={navigation} />
         <View style={{ height: 10 }} />
       </ScrollView>
       <FabButton
