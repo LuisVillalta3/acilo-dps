@@ -8,7 +8,6 @@ const { width, height } = Dimensions.get('window');
 import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import PacientesScreen from '@modules/Pacientes/screens/ListScreen';
 import { Ionicons } from '@expo/vector-icons';
-import { ROUTES_NAMES } from '@routes/constants';
 
 const BottomTabNavigator = () => {
   return (

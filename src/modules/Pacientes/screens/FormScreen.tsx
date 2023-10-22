@@ -3,16 +3,17 @@ import React, { useEffect } from 'react';
 import ViewContainer from '@components/ViewContainer';
 import PageTitle from '@components/PageTitle';
 import BackButton from '@components/BackButton';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { FormScreenNavigation, FormScreenProps } from '../types';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { FormScreenNavigation, PacienteRouteProps } from '../types';
 import CustomTextInput from '@components/inputs/CustomTextInput';
 import CustomButton from '@components/CustomButton';
 import EmptySpace from '@components/EmptySpace';
 import DatePicker from '@components/inputs/DatePicker';
 
-const FormScreen: React.FC<FormScreenProps> = ({ route }) => {
+const FormScreen = () => {
   const navigation = useNavigation<FormScreenNavigation>();
   const [id, setId] = React.useState<string>();
+  const route = useRoute<RouteProp<PacienteRouteProps>>();
   
   useEffect(() => {
     if (route.params === undefined) return;

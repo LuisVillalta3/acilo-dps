@@ -15,6 +15,7 @@ export const MyTheme = {
   ...MD3LightTheme,
   colors: {
     ...MD3LightTheme,
+    backdrop: 'rgba(0, 0, 0, 0.7)',
     primary: '#27B2B3',
   },
 };

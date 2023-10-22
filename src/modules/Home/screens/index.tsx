@@ -4,9 +4,9 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ButtonCard from '@modules/Home/components/ButtonCard';
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import CitaListItem from '@modules/Home/components/CitaListItem';
 import styles from '../styles/styles';
 import { useTheme } from 'react-native-paper';
+import CitaList from '@components/CitaList';
 
 const HomeScreen = () => {
   const { colors } = useTheme();
@@ -45,18 +45,7 @@ const HomeScreen = () => {
         <View style={{ marginVertical: 20 }}>
           <Text style={styles.citasText}>Proximas citas</Text>
         </View>
-        <View style={styles.citaList}>
-          <CitaListItem />
-          <CitaListItem inProgress={true} />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-          <CitaListItem />
-        </View>
+        <CitaList />
         <View style={{ height: 50 }}></View>
       </ScrollView>
     </SafeAreaView>
