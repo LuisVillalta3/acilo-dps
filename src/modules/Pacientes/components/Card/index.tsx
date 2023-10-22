@@ -9,8 +9,14 @@ import {
 import styles from '@routes/BottomTabNavigator/styles';
 import { useTheme } from 'react-native-paper';
 import { PacienteCardProps } from './types';
+import CalendarModal from '../CalendarModal';
 
 const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
+  const [visible, setVisible] = React.useState(false);
+
+  const showModal = () => setVisible(true);
+  const hideModal = () => setVisible(false);
+
   const { colors } = useTheme();
   const navigationProps = {
     pacienteID: 1
@@ -18,13 +24,14 @@ const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <CalendarModal visible={visible} hideModal={hideModal} />
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>John Doe</Text>
         <View style={styles.iconsContainer}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('PacienteScreen', navigationProps)}>
             <AntDesign name="eye" size={24} color={colors.primary} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={showModal}>
             <FontAwesome5
               name="calendar-alt"
               size={24}

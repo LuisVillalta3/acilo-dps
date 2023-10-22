@@ -5,10 +5,10 @@ export type ListScreenNavigation = StackNavigationProp<ScreenStackList, "Pacient
 
 export type FormScreenNavigation = StackNavigationProp<ScreenStackList, "PacienteFormScreen">
 
-export type FormScreenProps = {
+export type PacienteScreenNavigation = StackNavigationProp<ScreenStackList, "PacienteScreen">
+
+export type PacienteRouteProps = {
   route: {
-    params: {
-      pacienteID?: string
-    }
+    pacienteID?: string
   }
 }
