@@ -3,10 +3,10 @@ import React from 'react';
 import { Button } from 'react-native-paper';
 import { CustomButtonProps } from './types';
 
-const CustomButton = ({ text, onPress }: CustomButtonProps) => {
+const CustomButton = ({ text, onPress, mode = "contained" }: CustomButtonProps) => {
   return (
     <Button
-      mode="contained"
+      mode={mode}
       onPress={onPress}
       style={{ borderRadius: 5, paddingVertical: 5, marginVertical: 25 }}
       labelStyle={{ fontSize: 18, fontWeight: '700', color: '#fff' }}

@@ -7,25 +7,6 @@ export default StyleSheet.create({
     padding: 20,
     marginBottom: 15,
   },
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderBottomColor: "#D9D9D9",
-    borderBottomWidth: 1,
-    borderRadius: 0,
-    marginBottom: 10,
-    paddingBottom: 10,
-  },
-  titleText: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  subtitleText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#7F7F7F'
-  },
   iconsContainer: {
     flexDirection: 'row',
     gap: 15,
@@ -36,10 +17,13 @@ export default StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 10,
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    marginBottom: 15,
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
   },
   datosText: {
-    fontSize: 16,
+    fontSize: 18,
     color: '#7F7F7F',
     fontWeight: "500"
   },

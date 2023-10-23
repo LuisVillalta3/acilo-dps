@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '@modules/Home/screens';
-import DoctoresScreen from '@modules/Doctores';
+import DoctoresScreen from '@modules/Doctores/screens/ListScreen';
 const Tab = createBottomTabNavigator();
 const { width, height } = Dimensions.get('window');
 import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';

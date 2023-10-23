@@ -5,8 +5,11 @@ import { createRef } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { MyTheme, NavigationTheme } from './src/themes';
 import PacienteFormScreen from '@modules/Pacientes/screens/FormScreen';
+import DoctorFormScreen from '@modules/Doctores/screens/FormScreen';
 import { ScreenStackList } from '@routes/types';
 import PacienteScreen from '@modules/Pacientes/screens/PacienteScreen';
+import DoctorScreen from '@modules/Doctores/screens/DoctorScreen';
+import DoctorHorarioFormScreen from '@modules/Doctores/screens/HorariosScreen';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
 
@@ -28,6 +31,18 @@ export default function App() {
           <Stack.Screen
             name="PacienteScreen"
             component={PacienteScreen}
+          />
+          <Stack.Screen
+            name="DoctorFormScreen"
+            component={DoctorFormScreen}
+          />
+          <Stack.Screen
+            name="DoctorHorarioFormScreen"
+            component={DoctorHorarioFormScreen}
+          />
+          <Stack.Screen
+            name="DoctorScreen"
+            component={DoctorScreen}
           />
         </Stack.Navigator>
       </NavigationContainer>
