@@ -7,4 +7,7 @@ export type ScreenStackList = {
   DoctoresScreen: undefined
   Navigation: undefined
   PacienteScreen: undefined
+  DoctorScreen: undefined
+  DoctorFormScreen: undefined
+  DoctorHorarioFormScreen: undefined
 };
