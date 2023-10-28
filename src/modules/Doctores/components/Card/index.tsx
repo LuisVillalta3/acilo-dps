@@ -11,7 +11,7 @@ import { useTheme } from 'react-native-paper';
 import { DoctorCardProps } from './types';
 import CalendarModal from '@components/CalendarModal';
 
-const Card: React.FC<DoctorCardProps> = ({ navigation }) => {
+const Card: React.FC<DoctorCardProps> = ({ navigation, doctor }) => {
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
@@ -19,16 +19,18 @@ const Card: React.FC<DoctorCardProps> = ({ navigation }) => {
 
   const { colors } = useTheme();
   const navigationProps = {
-    doctorId: 1
+    doctorId: doctor.id
   };
 
   return (
     <View style={styles.container}>
-      <CalendarModal visible={visible} hideModal={hideModal} />
+      <CalendarModal visible={visible} hideModal={hideModal} title='Proximas citas' />
       <View style={styles.titleContainer}>
         <View>
-          <Text style={styles.titleText}>Dr. John Doe</Text>
-          <Text style={styles.subtitleText}>Medico general</Text>
+          <Text style={styles.titleText}>Dr. {doctor.nombre}</Text>
+          {doctor.especialidad && (
+            <Text style={styles.subtitleText}>{doctor.especialidad?.nombre}</Text>
+          )}
         </View>
         <View style={styles.iconsContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('DoctorHorarioFormScreen', navigationProps)}>
@@ -53,7 +55,7 @@ const Card: React.FC<DoctorCardProps> = ({ navigation }) => {
         <View style={styles.datosContainer}>
           <TouchableOpacity style={styles.infoButton}>
             <Text style={styles.datosText}>Tel:</Text>
-            <Text style={styles.datosText}>7484-3233</Text>
+            <Text style={styles.datosText}>{doctor.telefono}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.infoButton}>
             <FontAwesome5
@@ -62,14 +64,14 @@ const Card: React.FC<DoctorCardProps> = ({ navigation }) => {
               color={colors.primary}
               style={{ marginRight: 6 }}
             />
-            <Text style={styles.datosText}>7484-3233</Text>
+            <Text style={styles.datosText}>{doctor.whatsapp}</Text>
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.infoButton}>
           <View style={styles.infoIcon}>
             <MaterialIcons name="email" size={24} color="#7F7F7F" />
           </View>
-          <Text style={styles.datosText}>john.doe@email.com</Text>
+          <Text style={styles.datosText}>{doctor.email}</Text>
         </TouchableOpacity>
       </View>
     </View>

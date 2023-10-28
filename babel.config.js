@@ -19,11 +19,11 @@ module.exports = function (api) {
             '@components': './src/components',
             '@screens': './src/screens',
             '@modules': './src/modules',
-            '@routes': './src/routes'
+            '@routes': './src/routes',
             // "@services": "./src/services",
             // "@styles": "./src/styles",
             // "@types": "./src/types",
-            // "@utils": "./src/utils",
+            "@utils": "./src/utils",
           }
         }
       ]

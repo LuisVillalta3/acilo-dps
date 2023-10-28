@@ -9,6 +9,8 @@ const CustomTextInput = ({
   placeholder,
   mode,
   multiline,
+  onChangeText,
+  value,
   numberOfLines = 1,
   keyboardType = 'default'
 }: CustomTextInputProps) => {
@@ -21,7 +23,9 @@ const CustomTextInput = ({
       activeOutlineColor="#27B2B3"
       outlineColor='#bcbcbc'
       keyboardType={keyboardType}
+      value={value}
       multiline={multiline}
+      onChangeText={onChangeText}
       numberOfLines={numberOfLines}
     />
   )

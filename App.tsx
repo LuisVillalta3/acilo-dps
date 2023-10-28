@@ -10,42 +10,47 @@ import { ScreenStackList } from '@routes/types';
 import PacienteScreen from '@modules/Pacientes/screens/PacienteScreen';
 import DoctorScreen from '@modules/Doctores/screens/DoctorScreen';
 import DoctorHorarioFormScreen from '@modules/Doctores/screens/HorariosScreen';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
+
+const queryClient = new QueryClient()
 
 export default function App() {
   const navigationRef = createRef<any>();
 
   return (
-    <PaperProvider theme={MyTheme}>
-      <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
-        <Stack.Navigator
-          screenOptions={{ headerShown: false }}
-          initialRouteName="Navigation"
-        >
-          <Stack.Screen name="Navigation" component={BottomTabNavigator} />
-          <Stack.Screen
-            name="PacienteFormScreen"
-            component={PacienteFormScreen}
-          />
-          <Stack.Screen
-            name="PacienteScreen"
-            component={PacienteScreen}
-          />
-          <Stack.Screen
-            name="DoctorFormScreen"
-            component={DoctorFormScreen}
-          />
-          <Stack.Screen
-            name="DoctorHorarioFormScreen"
-            component={DoctorHorarioFormScreen}
-          />
-          <Stack.Screen
-            name="DoctorScreen"
-            component={DoctorScreen}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <QueryClientProvider client={queryClient}>
+      <PaperProvider theme={MyTheme}>
+        <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
+          <Stack.Navigator
+            screenOptions={{ headerShown: false }}
+            initialRouteName="Navigation"
+          >
+            <Stack.Screen name="Navigation" component={BottomTabNavigator} />
+            <Stack.Screen
+              name="PacienteFormScreen"
+              component={PacienteFormScreen}
+            />
+            <Stack.Screen
+              name="PacienteScreen"
+              component={PacienteScreen}
+            />
+            <Stack.Screen
+              name="DoctorFormScreen"
+              component={DoctorFormScreen}
+            />
+            <Stack.Screen
+              name="DoctorHorarioFormScreen"
+              component={DoctorHorarioFormScreen}
+            />
+            <Stack.Screen
+              name="DoctorScreen"
+              component={DoctorScreen}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </QueryClientProvider>
   );
 }

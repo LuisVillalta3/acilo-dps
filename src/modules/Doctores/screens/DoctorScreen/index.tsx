@@ -15,7 +15,6 @@ import EmptySpace from '@components/EmptySpace';
 const PacienteScreen = () => {
   const { colors } = useTheme();
   const route = useRoute<RouteProp<DoctorRouteProps>>();
-  console.log(route);
   
   const { doctorId } = route.params;
   const navigation = useNavigation<DoctorScreenNavigation>();

@@ -1,9 +1,7 @@
-import { View, Text, FlatList } from 'react-native';
+import { View } from 'react-native';
 import React, { useState } from 'react';
-import CustomTextInput from '../CustomTextInput';
 import { SelectTextInputProps } from './types';
 import DropDown from "react-native-paper-dropdown";
-import { Button, Divider, IconButton, List, Menu, Modal, Portal, TextInput } from 'react-native-paper';
 
 const data = [
   { id: '1', label: 'Option 1' },

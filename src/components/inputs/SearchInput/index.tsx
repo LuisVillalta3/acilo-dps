@@ -3,7 +3,7 @@ import React from 'react'
 import { SearchInputProps } from './types'
 import { TextInput } from 'react-native-paper'
 
-const SearchInput = ({label, mode, placeholder}: SearchInputProps) => {
+const SearchInput = ({label, mode, placeholder, value, onChangeText}: SearchInputProps) => {
   return (
     <TextInput
       label={label}
@@ -12,6 +12,8 @@ const SearchInput = ({label, mode, placeholder}: SearchInputProps) => {
       style={{ backgroundColor: '#F9F9F9' }}
       activeOutlineColor="#27B2B3"
       outlineColor='#bcbcbc'
+      value={value}
+      onChangeText={onChangeText}
       left={<TextInput.Icon icon="magnify" color="#bcbcbc" />}
     />
   )

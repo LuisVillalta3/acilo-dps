@@ -6,5 +6,7 @@ export type CustomTextInputProps = {
   placeholder?: string;
   multiline?: boolean;
   numberOfLines?: number;
-  keyboardType?: KeyboardTypeOptions
+  keyboardType?: KeyboardTypeOptions;
+  value?: string;
+  onChangeText?: (text: string) => void;
 }

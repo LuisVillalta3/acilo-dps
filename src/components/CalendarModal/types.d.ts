@@ -1,4 +1,5 @@
-export type CalendarModalProps = {
-  visible: boolean;
-  hideModal: () => void;
+import { CustomModalProps } from "@components/CustomModal/types";
+
+export interface CalendarModalProps extends CustomModalProps {
+
 }

@@ -7,3 +7,8 @@ export const DIAS = [
   'Sabado',
   'Domingo'
 ]
+
+export const DISPONIBLE_OPTIONS = [
+  { label: 'Disponible', value: 'true' },
+  { label: 'No disponible', value: 'false' },
+]
