@@ -10,7 +10,7 @@ export interface Doctor extends Timestamps {
   whatsapp:       string;
   dui:            string;
   disponible:     boolean;
-  idEspecialidad: number;
+  idEspecialidad?: number;
   horarios?:       Horario[];
   especialidad?:   Especialidad;
 }

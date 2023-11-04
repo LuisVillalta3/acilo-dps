@@ -6,4 +6,6 @@ export type SelectTextInputProps = {
   options: Array<{ label: string, value: string }>;
   value?: string;
   onChange?: (value: any) => void;
+  error?: string;
+  onBlur?: any;
 }

@@ -1,4 +1,5 @@
 import { apiClient } from "../utils/ApiClient"
+import { postDoctorProps } from "./types"
 
 const getDoctores = async (
   name?: string,
@@ -34,6 +35,40 @@ const getDoctores = async (
   return response.data
 }
 
+const getDoctor = async (id: string, includeEspecialidad?: boolean, includeHorarios?: boolean) => {
+  if (id.length === 0) return null;
+  const query = []
+
+  query.push(`includeEspecialidad=${String(includeEspecialidad)}`)
+  query.push(`includeHorarios=${String(includeHorarios)}`)
+
+  const response = await apiClient.get(`/doctors/${id}?${query.join('&')}`)
+
+  return response.data
+}
+
+const postDoctor = async (data: postDoctorProps) => {
+  const response = await apiClient.post('/doctors', data)
+
+  return response.data
+}
+
+const patchDoctor = async (id: string, data: postDoctorProps) => {
+  const response = await apiClient.patch(`/doctors/${id}`, data)
+
+  return response.data
+}
+
+const patchDoctorHorarios = async (id: string, data: any) => {
+  const response = await apiClient.patch(`/doctors/${id}/horarios`, data)
+
+  return response.data
+}
+
 export default {
-  getDoctores
+  getDoctores,
+  postDoctor,
+  getDoctor,
+  patchDoctor,
+  patchDoctorHorarios,
 }

@@ -3,8 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import doctorsService from "../../../services/doctors.service"
 import { useDoctoresStore } from "../store/doctoresStore"
 import { DoctoresStore, FiltrosDoctor } from "../types"
-import especialidadesService from "../../../services/especialidades.service"
-import { Especialidad } from "@models/Especialidad"
+import { useEspecialidades } from "../../../hooks/useEspecialidades"
 
 export const useDoctores = () => {
   const [nombreDoctor, setNombreDoctor] = useState("")
@@ -12,10 +11,8 @@ export const useDoctores = () => {
   const [especialidadDoctor, setEspecialidadDoctor] = useState("")
   const [disponibleDoctor, setDisponibleDoctor] = useState("")
   //
-  const [especialidadesList, setEspecialidadesList] = useState<Array<{
-    label: string;
-    value: string;
-  }>>([])
+  const { especialidadesList } = useEspecialidades()
+  //
   const [visible, setVisible] = React.useState(false);
   const [filtros, setFiltros] = useState<FiltrosDoctor>({
     disponible: "",
@@ -51,16 +48,6 @@ export const useDoctores = () => {
     })
   }
 
-  const {
-    data: especialidadesData,
-    status: especialidadesStatus,
-  } = useQuery({
-    queryKey: ['getEspecialidades'],
-    queryFn: () => especialidadesService.getEspecialidades(),
-    refetchOnWindowFocus: true,
-    refetchOnReconnect: true,
-  })
-
   const { data, status, isLoading, refetch, isFetching } = useQuery({
     queryKey: ['getDoctores', nombreDoctor, emailDoctor, especialidadDoctor, disponibleDoctor],
     queryFn: () => doctorsService.getDoctores(
@@ -80,16 +67,13 @@ export const useDoctores = () => {
     }
   }, [status, data])
 
-  useEffect(() => {
-    if (especialidadesStatus === 'success') {
-      const list = (especialidadesData as Especialidad[]).map((especialidad) => ({
-        label: especialidad.nombre,
-        value: especialidad.id.toString(),
-      }))
-
-      setEspecialidadesList(list)
-    }
-  }, [especialidadesStatus, especialidadesData])
+  const changeNombreDoctor = (value: string) => {
+    setNombreDoctor(value)
+    setFiltros({
+      ...filtros,
+      nombre: value,
+    })
+  }
 
   return {
     doctores,
@@ -97,7 +81,7 @@ export const useDoctores = () => {
     refetch,
     isFetching,
     nombreDoctor,
-    changeNombreDoctor: setNombreDoctor,
+    changeNombreDoctor,
     visible,
     showModal,
     hideModal,

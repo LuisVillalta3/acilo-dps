@@ -1,24 +1,23 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native'
 import React, { useState } from 'react';
 import { SelectTextInputProps } from './types';
 import DropDown from "react-native-paper-dropdown";
-
-const data = [
-  { id: '1', label: 'Option 1' },
-  { id: '2', label: 'Option 2' },
-  { id: '3', label: 'Option 3' },
-  { id: '4', label: 'Option 4' },
-  { id: '5', label: 'Option 5' },
-];
 
 const SelectInput = ({
   label,
   mode,
   options,
   value,
-  onChange
+  onChange,
+  error,
+  onBlur,
 }: SelectTextInputProps) => {
   const [showDropDown, setShowDropDown] = useState(false);
+
+  const onDismiss = () => {
+    onBlur && onBlur()
+    setShowDropDown(false)
+  }
 
   return (
     <View>
@@ -27,11 +26,20 @@ const SelectInput = ({
         mode={mode}
         visible={showDropDown}
         showDropDown={() => setShowDropDown(true)}
-        onDismiss={() => setShowDropDown(false)}
+        onDismiss={onDismiss}
         value={value}
         setValue={onChange ?? (() => {})}
         list={options}
       />
+      {error && error.length > 0 && (
+        <Text style={{
+          color: "#FF0000",
+          fontSize: 14,
+          marginTop: 5,
+          marginLeft: 5,
+          fontWeight: "bold",
+        }}>{error}</Text>
+      )}
     </View>
   );
 };

@@ -7,5 +7,12 @@ export default StyleSheet.create({
   },
   activeOutlineColor: {
     borderColor: "#27B2B3"
+  },
+  errorText: {
+    color: "#FF0000",
+    fontSize: 14,
+    marginTop: 5,
+    marginLeft: 5,
+    fontWeight: "bold"
   }
 })

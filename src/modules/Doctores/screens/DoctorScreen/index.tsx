@@ -11,65 +11,59 @@ import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
 import styles from './styles';
 import CitaList from '@components/CitaList';
 import EmptySpace from '@components/EmptySpace';
+import { useDoctor } from '../../hooks/useDoctor';
+import ListContainer from '@components/ListContainer';
 
 const PacienteScreen = () => {
-  const { colors } = useTheme();
-  const route = useRoute<RouteProp<DoctorRouteProps>>();
-  
-  const { doctorId } = route.params;
-  const navigation = useNavigation<DoctorScreenNavigation>();
-
-  useEffect(() => {
-    if (!doctorId) {
-      navigation.navigate("DoctoresScreen");
-    }
-  }, [doctorId])
+  const { colors, doctor, isLoading } = useDoctor()
 
   return (
     <ViewContainer>
       <BackButton title="Doctores" />
       <PageTitle title="Datos del doctor" paddingVertical={0} />
-      <ScrollView style={{ paddingHorizontal: 20, paddingVertical: 10 }}>
-        <InfoBlock
-          title='Nombre'
-          value='Luis Villalta'
-          icon={<Ionicons name="person" size={34} color="#27B2B3" />}
-        />
-        <View>
-          <View style={styles.infoButton}>
-            <Text style={[styles.datosText, { fontWeight: 'bold' }]}>
-              Especialidad: &nbsp;
-            </Text>
-            <Text style={styles.datosText}>Medico general</Text>
+      <ListContainer isLoading={isLoading && doctor !== undefined}>
+        <ScrollView style={{ paddingHorizontal: 20, paddingVertical: 10 }}>
+          <InfoBlock
+            title='Nombre'
+            value={doctor?.nombre || ''}
+            icon={<Ionicons name="person" size={34} color="#27B2B3" />}
+          />
+          <View>
+            <View style={styles.infoButton}>
+              <Text style={[styles.datosText, { fontWeight: 'bold' }]}>
+                Especialidad: &nbsp;
+              </Text>
+              <Text style={styles.datosText}>{doctor?.especialidad?.nombre}</Text>
+            </View>
+            <TouchableOpacity style={styles.infoButton}>
+              <View style={styles.infoIcon}>
+                <Entypo name="phone" size={24} color={colors.primary} />
+              </View>
+              <Text style={styles.datosText}>{doctor?.telefono}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.infoButton}>
+              <FontAwesome5
+                name="whatsapp-square"
+                size={24}
+                color={colors.primary}
+                style={{ marginRight: 6 }}
+              />
+              <Text style={styles.datosText}>{doctor?.whatsapp}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.infoButton}>
+              <View style={styles.infoIcon}>
+                <MaterialIcons name="email" size={24} color={colors.primary} />
+              </View>
+              <Text style={styles.datosText}>{doctor?.email}</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity style={styles.infoButton}>
-            <View style={styles.infoIcon}>
-              <Entypo name="phone" size={24} color={colors.primary} />
-            </View>
-            <Text style={styles.datosText}>+503 1234-5678</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.infoButton}>
-            <FontAwesome5
-              name="whatsapp-square"
-              size={24}
-              color={colors.primary}
-              style={{ marginRight: 6 }}
-            />
-            <Text style={styles.datosText}>7484-3233</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.infoButton}>
-            <View style={styles.infoIcon}>
-              <MaterialIcons name="email" size={24} color={colors.primary} />
-            </View>
-            <Text style={styles.datosText}>john.doe@email.com</Text>
-          </TouchableOpacity>
-        </View>
-        <View style={{ marginVertical: 20 }}>
-          <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Historial de citas</Text>
-        </View>
-        <CitaList />
-        <EmptySpace height={40} />
-      </ScrollView>
+          <View style={{ marginVertical: 20 }}>
+            <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Historial de citas</Text>
+          </View>
+          <CitaList />
+          <EmptySpace height={40} />
+        </ScrollView>
+      </ListContainer>
     </ViewContainer>
   )
 }
