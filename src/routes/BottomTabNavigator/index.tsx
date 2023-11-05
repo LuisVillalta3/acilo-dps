@@ -8,6 +8,7 @@ const { width, height } = Dimensions.get('window');
 import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import PacientesScreen from '@modules/Pacientes/screens/ListScreen';
 import { Ionicons } from '@expo/vector-icons';
+import SettingsScreen from '@modules/Settings/screens/settingsScreens';
 
 const BottomTabNavigator = () => {
   return (
@@ -48,6 +49,15 @@ const BottomTabNavigator = () => {
                 size={30}
                 color={color}
               />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="SettingsScreen"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="settings" size={30} color={color} />
             )
           }}
         />

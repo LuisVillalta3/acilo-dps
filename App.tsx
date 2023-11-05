@@ -13,6 +13,9 @@ import DoctorHorarioFormScreen from '@modules/Doctores/screens/HorariosScreen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import SplashScreen from 'react-native-splash-screen';
+import LoginScreen from '@modules/Login/screens';
+import { useAuthStore } from './src/stores/useAuthStore';
+import { AuthStore } from './src/stores/types';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
 
@@ -25,6 +28,8 @@ export default function App() {
     SplashScreen.hide();
   }, [])
 
+  const isLoggedIn = useAuthStore((state: AuthStore) => state.isLoggedIn)
+
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -32,8 +37,9 @@ export default function App() {
           <NavigationContainer ref={navigationRef} theme={NavigationTheme}>
             <Stack.Navigator
               screenOptions={{ headerShown: false }}
-              initialRouteName="Navigation"
+              initialRouteName={isLoggedIn ? "Navigation" : "LoginScreen"}
             >
+              <Stack.Screen name="LoginScreen" component={LoginScreen} />
               <Stack.Screen name="Navigation" component={BottomTabNavigator} />
               <Stack.Screen
                 name="PacienteFormScreen"

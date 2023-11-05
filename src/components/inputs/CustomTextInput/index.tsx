@@ -27,6 +27,7 @@ const CustomTextInput = ({
         activeOutlineColor="#27B2B3"
         outlineColor='#bcbcbc'
         keyboardType={keyboardType}
+        secureTextEntry={mode === 'outlined' && label === 'Password'}
         value={value}
         multiline={multiline}
         onChangeText={onChangeText}

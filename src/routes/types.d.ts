@@ -1,6 +1,7 @@
 import { BackButtonProps } from "@components/BackButton/types";
 
 export type ScreenStackList = {
+  LoginScreen: undefined;
   HomeScreen: undefined
   PacientesScreen: undefined
   PacienteFormScreen: undefined
@@ -10,4 +11,7 @@ export type ScreenStackList = {
   DoctorScreen: undefined
   DoctorFormScreen: undefined
   DoctorHorarioFormScreen: undefined
+  SettingsScreen: undefined
+  MiPerfilScreen: undefined
+  CambiarContrasenaScreen: undefined
 };
