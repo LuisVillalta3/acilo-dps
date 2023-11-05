@@ -1,14 +1,14 @@
-import { useEspecialidades } from "../../../hooks/useEspecialidades"
+import { useEspecialidades } from "@hooks/useEspecialidades"
 import { useFormik } from 'formik'
 import { formInitialValues } from "../constants"
 import { doctorFormSchema } from "../validations/doctorFormSchema"
-import doctorsService from "../../../services/doctors.service"
-import Toast from "react-native-toast-message"
+import doctorsService from "@services/doctors.service"
 import { DoctorRouteProps, FormScreenNavigation } from "../types"
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native"
 import { useDoctores } from "./useDoctores"
 import { useEffect, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
+import { showToast } from "@utils/functions"
 
 export const useDoctorForm = () => {
   const [id, setId] = useState<string>("");
@@ -34,18 +34,12 @@ export const useDoctorForm = () => {
           text2 = `El doctor ${values.nombre} ha sido actualizado correctamente.`
         }
         
-        Toast.show({ type: 'success', text1, text2 });
+        showToast(text1, text2)
 
         await doctoresRefecth()
-        if (id === "") {
-          navigation.navigate('DoctoresScreen')
-        }
+        if (id === "") { navigation.navigate('DoctoresScreen') }
       } catch (error) {
-        Toast.show({
-          type: 'error',
-          text1: 'Ha ocurrido un error al crear el doctor.',
-          text2: 'Por favor, intenta de nuevo.'
-        });
+        showToast('Ha ocurrido un error al crear el doctor.', 'Por favor, intenta de nuevo.', "error")
       }
     }
   })
@@ -70,7 +64,7 @@ export const useDoctorForm = () => {
       setFieldValue('email', data.email)
       setFieldValue('telefono', data.telefono)
       setFieldValue('whatsapp', data.whatsapp)
-      setFieldValue('dui', String(data.dui).replace(/-/g, ''))
+      setFieldValue('dui', String(data.dui || "").replace(/-/g, ''))
       setFieldValue('idEspecialidad', String(data.idEspecialidad))
       setFieldValue('disponible', data.disponible)
     }

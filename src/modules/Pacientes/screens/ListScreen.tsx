@@ -1,52 +1,48 @@
 import PageTitle from '@components/PageTitle';
 import React from 'react';
-import { View, TouchableOpacity, ScrollView } from 'react-native';
+import { View, ScrollView, RefreshControl } from 'react-native';
 import ViewContainer from '@components/ViewContainer';
 import SearchInput from '@components/inputs/SearchInput';
-import { Ionicons } from '@expo/vector-icons';
 import Card from '@modules/Pacientes/components/Card';
 import styles from '../styles/ListScreenStyles';
 import FabButton from '@components/FabButton';
-import { useNavigation } from '@react-navigation/native';
-import { ListScreenNavigation } from '../types';
+import ListContainer from '@components/ListContainer';
+import { usePacientes } from '../hooks/usePacientes';
 
 const PacientesScreen = () => {
-  const navigation = useNavigation<ListScreenNavigation>();
+  const {
+    isLoading,
+    pacientes,
+    refetch,
+    navigation,
+    setNombrePaciente
+  } = usePacientes()
 
   return (
     <ViewContainer>
       <PageTitle title="Pacientes" />
       <View style={styles.filterContainer}>
         <View style={{ flex: 1 }}>
-          <SearchInput label="Buscar paciente..." mode="outlined" />
+          <SearchInput
+            label="Buscar paciente..."
+            mode="outlined"
+            onChangeText={(text) => setNombrePaciente(text)}
+          />
         </View>
-        <TouchableOpacity onPress={() => {}} style={styles.filterButton}>
-          <Ionicons name="options" size={34} color="black" />
-        </TouchableOpacity>
       </View>
-      <ScrollView style={{ paddingHorizontal: 20 }}>
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <Card navigation={navigation} />
-        <View style={{ height: 10 }} />
-      </ScrollView>
+      <ListContainer isLoading={isLoading} isEmpty={pacientes.length <= 0} refetch={refetch}>
+        <ScrollView
+          style={{ paddingHorizontal: 20 }}
+          refreshControl={
+            <RefreshControl refreshing={isLoading} onRefresh={refetch} />
+          }
+        >
+          {pacientes.map((paciente) => (
+            <Card paciente={paciente} navigation={navigation} key={paciente.id} />
+          ))}
+          <View style={{ height: 10 }} />
+        </ScrollView>
+      </ListContainer>
       <FabButton
         icon="plus"
         onPress={() => navigation.navigate('PacienteFormScreen')}

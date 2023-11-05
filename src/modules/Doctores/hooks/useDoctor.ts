@@ -1,12 +1,12 @@
 import { RouteProp, useNavigation, useRoute, useTheme } from "@react-navigation/native";
-import doctorsService from "../../../services/doctors.service"
+import doctorsService from "@services/doctors.service"
 import { useQuery } from "@tanstack/react-query"
 import { useEffect, useState } from "react"
 import { DoctorRouteProps, DoctorScreenNavigation } from "../types";
-import { Doctor } from "../../../models/Doctor";
-import { Horario } from "../../../models/horario";
+import { Doctor } from "@models/Doctor";
+import { Horario } from "@models/horario";
 import Toast from "react-native-toast-message";
-import { sortHorariosByDays } from "../../../utils/functions";
+import { sortHorariosByDays } from "@utils/functions";
 
 export const useDoctor = () => {
   const route = useRoute<RouteProp<DoctorRouteProps>>();

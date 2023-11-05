@@ -4,14 +4,14 @@ import {
   MaterialIcons,
   FontAwesome5,
   AntDesign,
-  FontAwesome
 } from '@expo/vector-icons';
 import styles from '@routes/BottomTabNavigator/styles';
 import { useTheme } from 'react-native-paper';
 import { PacienteCardProps } from './types';
 import CalendarModal from '@components/CalendarModal';
+import { getEdad } from '@utils/functions';
 
-const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
+const Card: React.FC<PacienteCardProps> = ({ navigation, paciente }) => {
   const [visible, setVisible] = React.useState(false);
 
   const showModal = () => setVisible(true);
@@ -19,14 +19,14 @@ const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
 
   const { colors } = useTheme();
   const navigationProps = {
-    pacienteID: 1
+    pacienteID: paciente.id,
   };
 
   return (
     <View style={styles.container}>
       <CalendarModal visible={visible} hideModal={hideModal} />
       <View style={styles.titleContainer}>
-        <Text style={styles.titleText}>John Doe</Text>
+        <Text style={styles.titleText}>{paciente.nombre}</Text>
         <View style={styles.iconsContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('PacienteScreen', navigationProps)}>
             <AntDesign name="eye" size={24} color={colors.primary} />
@@ -46,11 +46,11 @@ const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
       <View style={styles.datosContainer}>
         <Text style={styles.datosText}>
           <Text style={styles.fontBold}>Edad:</Text>
-          60 años
+          {getEdad(paciente.fechaNacimiento)} años
         </Text>
         <Text style={styles.datosText}>
           <Text style={styles.fontBold}>Tel:</Text>
-          2203-2203
+          {paciente.telefono}
         </Text>
       </View>
       <View>
@@ -61,19 +61,19 @@ const Card: React.FC<PacienteCardProps> = ({ navigation }) => {
             color={colors.primary}
             style={{ marginRight: 6 }}
           />
-          <Text style={styles.datosText}>7484-3233</Text>
+          <Text style={styles.datosText}>{paciente.whatsapp}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.infoButton}>
           <View style={styles.infoIcon}>
             <MaterialIcons name="email" size={24} color="#7F7F7F" />
           </View>
-          <Text style={styles.datosText}>john.doe@email.com</Text>
+          <Text style={styles.datosText}>{paciente.email}</Text>
         </TouchableOpacity>
         <View style={styles.infoButton}>
           <View style={[styles.infoIcon, { alignItems: 'center' }]}>
             <FontAwesome5 name="map-marker-alt" size={24} color="#7F7F7F" />
           </View>
-          <Text style={styles.datosText}>San Salvador, El Salvador</Text>
+          <Text style={styles.datosText}>{paciente.direccion}</Text>
         </View>
       </View>
     </View>

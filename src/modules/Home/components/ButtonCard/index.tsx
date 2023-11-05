@@ -3,9 +3,9 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { HomeButtonCardProps } from './types';
 import styles from './styles';
 
-const HomeButtonCard = ({ title, icon, description }: HomeButtonCardProps) => {
+const HomeButtonCard = ({ title, icon, description, onPress }: HomeButtonCardProps) => {
   return (
-    <TouchableOpacity onPress={() => {}} style={styles.container}>
+    <TouchableOpacity onPress={onPress} style={styles.container}>
       <View style={styles.iconContainer}>
         {icon}
       </View>

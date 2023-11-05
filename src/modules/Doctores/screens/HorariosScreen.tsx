@@ -1,10 +1,8 @@
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import React, { useEffect } from 'react';
+import { View, ScrollView } from 'react-native';
+import React from 'react';
 import ViewContainer from '@components/ViewContainer';
 import PageTitle from '@components/PageTitle';
 import BackButton from '@components/BackButton';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
-import { DoctorHorarioFormScreenNavigation, DoctorRouteProps } from '../types';
 import CustomButton from '@components/CustomButton';
 import EmptySpace from '@components/EmptySpace';
 import InfoBlock from '../components/InfoBlock';

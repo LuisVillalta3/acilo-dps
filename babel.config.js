@@ -13,17 +13,18 @@ module.exports = function (api) {
         {
           alias: {
             // This needs to be mirrored in tsconfig.json
-            // "@constants": "./src/constants",
-            // "@hooks": "./src/hooks",
+            "@constants": "./src/constants",
+            "@hooks": "./src/hooks",
             '@navigation': './src/navigation',
             '@components': './src/components',
             '@screens': './src/screens',
             '@modules': './src/modules',
             '@routes': './src/routes',
-            // "@services": "./src/services",
-            // "@styles": "./src/styles",
-            // "@types": "./src/types",
+            "@services": "./src/services",
+            "@styles": "./src/styles",
+            "@types": "./src/types",
             "@utils": "./src/utils",
+            "@models": "./src/models",
           }
         }
       ]

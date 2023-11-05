@@ -11,7 +11,6 @@ import { useNavigation } from '@react-navigation/native';
 import { ListScreenNavigation } from '../types';
 import { useDoctores } from '../hooks/useDoctores';
 import ListContainer from '@components/ListContainer';
-import CustomButton from '@components/CustomButton';
 import FiltrosModal from '../components/FiltrosModal';
 
 const DoctoresScreen = () => {

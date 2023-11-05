@@ -1,5 +1,5 @@
 import { View, Text, Keyboard } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { DatePickerProps } from './types'
 import { TextInput, Button } from 'react-native-paper'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
@@ -9,14 +9,18 @@ const DatePicker: React.FC<DatePickerProps> = ({
   mode,
   placeholder,
   minimumDate = new Date(1930, 0, 1),
-  maximumDate = new Date()
+  maximumDate = new Date(),
+  onChangeDate,
+  value,
+  error,
 }) => {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date>(new Date());
 
   const onChange = (event: any, selectedDate: any) => {
     const currentDate = selectedDate;
     setDate(currentDate);
     Keyboard.dismiss()
+    if (onChangeDate) onChangeDate(selectedDate)
   };
 
   const showDatepicker = () => {
@@ -29,6 +33,10 @@ const DatePicker: React.FC<DatePickerProps> = ({
       maximumDate,
     });
   };
+
+  useEffect(() => {
+    if (value !== undefined) setDate(new Date(value))
+  }, [value])
 
   return (
     <View>
@@ -44,6 +52,11 @@ const DatePicker: React.FC<DatePickerProps> = ({
         onPressIn={showDatepicker}
         left={<TextInput.Icon icon="calendar" color="#7F7F7F" />}
       />
+      {error && error.length > 0 && (
+        <Text style={{ color: "#FF0000", fontSize: 14, marginTop: 5, marginLeft: 5, fontWeight: "bold" }}>
+          {error}
+        </Text>
+      )}
     </View>
   )
 }

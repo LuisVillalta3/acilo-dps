@@ -7,9 +7,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import styles from '../styles/styles';
 import { useTheme } from 'react-native-paper';
 import CitaList from '@components/CitaList';
+import { useNavigation } from '@react-navigation/native';
+import { HomeScreenNavigation } from '../types';
 
 const HomeScreen = () => {
   const { colors } = useTheme();
+  const navigation = useNavigation<HomeScreenNavigation>();
 
   return (
     <SafeAreaView>
@@ -25,6 +28,7 @@ const HomeScreen = () => {
             <ButtonCard
               title="Doctores"
               description="Gestión de personal"
+              onPress={() => navigation.navigate('DoctoresScreen')}
               icon={
                 <MaterialCommunityIcons
                   name="stethoscope"
@@ -38,6 +42,7 @@ const HomeScreen = () => {
             <ButtonCard
               title="Pacientes"
               description="Gestión de pacientes"
+              onPress={() => navigation.navigate('PacientesScreen')}
               icon={<Ionicons name="person" size={34} color={colors.primary} />}
             />
           </View>

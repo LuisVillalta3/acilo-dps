@@ -1,7 +1,5 @@
 import { ScrollView, TouchableOpacity, View, Text } from 'react-native'
-import React, { useEffect } from 'react'
-import { RouteProp, useNavigation, useRoute, useTheme } from '@react-navigation/native';
-import { DoctorRouteProps, DoctorScreenNavigation } from '../../types';
+import React from 'react'
 import ViewContainer from '@components/ViewContainer';
 import BackButton from '@components/BackButton';
 import PageTitle from '@components/PageTitle';

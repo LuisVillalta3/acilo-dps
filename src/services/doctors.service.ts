@@ -1,6 +1,8 @@
 import { apiClient } from "../utils/ApiClient"
 import { postDoctorProps } from "./types"
 
+const DOCTOR_URI = '/doctors'
+
 const getDoctores = async (
   name?: string,
   email?: string,
@@ -30,7 +32,7 @@ const getDoctores = async (
     query.push('includeEspecialidad=true')
   }
 
-  const response = await apiClient.get(`/doctors?${query.join('&')}`)
+  const response = await apiClient.get(`${DOCTOR_URI}?${query.join('&')}`)
 
   return response.data
 }
@@ -42,25 +44,25 @@ const getDoctor = async (id: string, includeEspecialidad?: boolean, includeHorar
   query.push(`includeEspecialidad=${String(includeEspecialidad)}`)
   query.push(`includeHorarios=${String(includeHorarios)}`)
 
-  const response = await apiClient.get(`/doctors/${id}?${query.join('&')}`)
+  const response = await apiClient.get(`${DOCTOR_URI}/${id}?${query.join('&')}`)
 
   return response.data
 }
 
 const postDoctor = async (data: postDoctorProps) => {
-  const response = await apiClient.post('/doctors', data)
+  const response = await apiClient.post(DOCTOR_URI, data)
 
   return response.data
 }
 
 const patchDoctor = async (id: string, data: postDoctorProps) => {
-  const response = await apiClient.patch(`/doctors/${id}`, data)
+  const response = await apiClient.patch(`${DOCTOR_URI}/${id}`, data)
 
   return response.data
 }
 
 const patchDoctorHorarios = async (id: string, data: any) => {
-  const response = await apiClient.patch(`/doctors/${id}/horarios`, data)
+  const response = await apiClient.patch(`${DOCTOR_URI}/${id}/horarios`, data)
 
   return response.data
 }

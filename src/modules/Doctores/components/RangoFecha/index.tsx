@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 import { RangoFechaProps } from './types'
 import { DateTimePickerAndroid } from '@react-native-community/datetimepicker';
 import { Checkbox, Divider, TextInput } from 'react-native-paper';
-import { Horario } from '../../../../models/horario';
+import { Horario } from '@models/horario';
 
 const RangoFecha = ({ dia, horario, onChangeHora }: RangoFechaProps) => {
   const [startHour, setStartHour] = useState<Date>(new Date());

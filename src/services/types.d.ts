@@ -7,3 +7,13 @@ export interface postDoctorProps {
   idEspecialidad: string
   disponible: boolean
 }
+
+export interface postPacienteProps {
+  nombre: string
+  telefono: string
+  email: string
+  whatsapp: string
+  dui: string
+  fechaNacimiento: Date
+  direccion: string
+}

@@ -1,10 +1,8 @@
 import { ScrollView } from 'react-native';
-import React, { useEffect } from 'react';
+import React from 'react';
 import ViewContainer from '@components/ViewContainer';
 import PageTitle from '@components/PageTitle';
 import BackButton from '@components/BackButton';
-import { RouteProp, useRoute } from '@react-navigation/native';
-import { DoctorRouteProps } from '../types';
 import CustomTextInput from '@components/inputs/CustomTextInput';
 import CustomButton from '@components/CustomButton';
 import EmptySpace from '@components/EmptySpace';

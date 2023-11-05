@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { useQuery } from '@tanstack/react-query'
-import doctorsService from "../../../services/doctors.service"
+import doctorsService from "@services/doctors.service"
 import { useDoctoresStore } from "../store/doctoresStore"
 import { DoctoresStore, FiltrosDoctor } from "../types"
-import { useEspecialidades } from "../../../hooks/useEspecialidades"
+import { useEspecialidades } from "@hooks/useEspecialidades"
 
 export const useDoctores = () => {
   const [nombreDoctor, setNombreDoctor] = useState("")
