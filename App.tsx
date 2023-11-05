@@ -1,7 +1,7 @@
 import BottomTabNavigator from '@routes/BottomTabNavigator';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createRef } from 'react';
+import { createRef, useEffect } from 'react';
 import { PaperProvider } from 'react-native-paper';
 import { MyTheme, NavigationTheme } from './src/themes';
 import PacienteFormScreen from '@modules/Pacientes/screens/FormScreen';
@@ -12,6 +12,7 @@ import DoctorScreen from '@modules/Doctores/screens/DoctorScreen';
 import DoctorHorarioFormScreen from '@modules/Doctores/screens/HorariosScreen';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
 
@@ -19,6 +20,10 @@ const queryClient = new QueryClient()
 
 export default function App() {
   const navigationRef = createRef<any>();
+
+  useEffect(() => {
+    SplashScreen.hide();
+  }, [])
 
   return (
     <>
