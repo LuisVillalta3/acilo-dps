@@ -47,6 +47,13 @@ const getConsultas = async ({
   return response.data
 }
 
+const cancelarConsulta = async (id: string) => {
+  const response = await apiClient.delete(`${CONSULTAS_URI}/${id}`)
+
+  return response.data
+}
+
 export default {
   getConsultas,
+  cancelarConsulta,
 }

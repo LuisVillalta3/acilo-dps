@@ -1,9 +1,10 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useMemo } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
 import styles from './styles'
 import { Consulta } from '@models/consulta'
 import moment from 'moment-timezone'
+import { useCitaCard } from './useCitaCard'
 
 const color = "#27B2B3"
 
@@ -12,6 +13,14 @@ type CitaCardProps = {
 }
 
 const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
+  if (!consulta) return null
+
+  const { setId } = useCitaCard();
+
+  useEffect(() => {
+    setId(consulta.id);
+  }, [consulta])
+
   const status = useMemo(() => {
     if (!consulta) return 'Sin definir'
     if (consulta.status === 1) return 'Próxima'
@@ -56,22 +65,53 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
         </View>
         <View style={styles.dataTextContainer}>
           <View style={{ ...styles.dot, backgroundColor: dotColor }} />
-          <Text style={styles.dataText}>{status}</Text>
+          <Text style={{ 
+            ...styles.dataText,
+            color: dotColor,
+            fontWeight: 'bold',
+           }}>{status}</Text>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Agendar proxima cita</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ 
-          ...styles.button,
-          ...styles.primaryButton,
-         }}>
-          <Text style={{ 
-            ...styles.buttonText,
-            ...styles.primaryButtonText,
-           }}>Ver detalles</Text>
-        </TouchableOpacity>
+        {consulta.status === 1 && (
+          <>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Cancelar cita</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ 
+              ...styles.button,
+              ...styles.primaryButton,
+            }}>
+              <Text style={{ 
+                ...styles.buttonText,
+                ...styles.primaryButtonText,
+              }}>Iniciar consulta</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        {consulta.status === 2 && (
+          <>
+            <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText}>Agendar proxima</Text>
+            </TouchableOpacity>
+          </>
+        )}
+        {consulta.status !== 1 && consulta.status !== 3 && (
+          <TouchableOpacity style={{ 
+            ...styles.button,
+            ...styles.primaryButton,
+          }}>
+            <Text style={{ 
+              ...styles.buttonText,
+              ...styles.primaryButtonText,
+            }}>Ver detalles</Text>
+          </TouchableOpacity>
+        )}
+        {consulta.status === 3 && (
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Reagendar</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   )
