@@ -9,9 +9,12 @@ import { useTheme } from 'react-native-paper';
 import CitaList from '@components/CitaList';
 import { useNavigation } from '@react-navigation/native';
 import { HomeScreenNavigation } from '../types';
+import { useHome } from '../hooks/useHome';
+import ListContainer from '@components/ListContainer';
 
 const HomeScreen = () => {
   const { colors } = useTheme();
+  const { consultas, isLoading } = useHome();
   const navigation = useNavigation<HomeScreenNavigation>();
 
   return (
@@ -50,7 +53,9 @@ const HomeScreen = () => {
         <View style={{ marginVertical: 20 }}>
           <Text style={styles.citasText}>Proximas citas</Text>
         </View>
-        <CitaList />
+        <ListContainer isLoading={isLoading}>
+          <CitaList consultas={consultas} />
+        </ListContainer>
         <View style={{ height: 50 }}></View>
       </ScrollView>
     </SafeAreaView>

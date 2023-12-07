@@ -2,18 +2,12 @@ import { View, Text } from 'react-native'
 import React from 'react'
 import CitaListItem from '@components/CitaListItem'
 import styles from './styles'
+import { CitaListProps } from './types'
 
-const CitaList = () => {
+const CitaList: React.FC<CitaListProps> = ({ consultas }) => {
   return (
     <View style={styles.citaList}>
-      <CitaListItem />
-      <CitaListItem inProgress={true} />
-      <CitaListItem />
-      <CitaListItem />
-      <CitaListItem />
-      <CitaListItem />
-      <CitaListItem />
-      <CitaListItem />
+      {consultas.map((consulta) => <CitaListItem key={consulta.id} consulta={consulta} />)}
     </View>
   )
 }

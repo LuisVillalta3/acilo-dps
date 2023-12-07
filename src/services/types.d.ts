@@ -17,3 +17,13 @@ export interface postPacienteProps {
   fechaNacimiento: Date
   direccion: string
 }
+
+export interface GetConsultasProps {
+  includeDoctor?: boolean
+  includePaciente?: boolean
+  includeEspecialidad?: boolean
+  includeTipoConsulta?: boolean
+  proximasCitas?: boolean
+  limit?: number,
+  status?: number | null
+}

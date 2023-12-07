@@ -1,3 +1,5 @@
+import { Consulta } from "@models/consulta";
+
 export type CitaListItemProps = {
-  inProgress?: boolean;
+  consulta: Consulta;
 }

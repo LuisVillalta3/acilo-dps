@@ -9,6 +9,7 @@ import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import PacientesScreen from '@modules/Pacientes/screens/ListScreen';
 import { Ionicons } from '@expo/vector-icons';
 import SettingsScreen from '@modules/Settings/screens/settingsScreens';
+import ConsultasScreen from '@modules/Consultas/screens/ListScreen';
 
 const BottomTabNavigator = () => {
   return (
@@ -27,6 +28,15 @@ const BottomTabNavigator = () => {
           options={{
             tabBarIcon: ({ color }) => (
               <Foundation name="home" size={30} color={color} />
+            )
+          }}
+        />
+        <Tab.Screen
+          name="ConsultasScreen"
+          component={ConsultasScreen}
+          options={{
+            tabBarIcon: ({ color }) => (
+              <Ionicons name="calendar" size={30} color={color} />
             )
           }}
         />

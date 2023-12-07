@@ -1,12 +1,16 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useMemo } from 'react'
 import styles from './styles'
 import { CitaListItemProps } from './types'
 import { useTheme } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons';
 
-const CitaListItem = ({ inProgress }: CitaListItemProps) => {
+const CitaListItem = ({ consulta }: CitaListItemProps) => {
+  if (!consulta) return null;
+
   const { colors } = useTheme();
+
+  const inProgress = useMemo(() => consulta.status === 5, [consulta])
 
   return (
     <TouchableOpacity
