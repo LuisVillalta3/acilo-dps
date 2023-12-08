@@ -13,6 +13,7 @@ const CustomTextInput = ({
   value,
   onBlur,
   error,
+  disabled,
   numberOfLines = 1,
   keyboardType = 'default'
 }: CustomTextInputProps) => {
@@ -30,6 +31,7 @@ const CustomTextInput = ({
         secureTextEntry={mode === 'outlined' && label === 'Password'}
         value={value}
         multiline={multiline}
+        disabled={disabled}
         onChangeText={onChangeText}
         error={!!error && error.length > 0}
         numberOfLines={numberOfLines}

@@ -1,5 +1,5 @@
 import { apiClient } from "../utils/ApiClient"
-import { GetConsultasProps } from "./types"
+import { GetConsultasProps, ReagendarConsultaProps } from "./types"
 
 const CONSULTAS_URI = '/consultas'
 
@@ -47,8 +47,20 @@ const getConsultas = async ({
   return response.data
 }
 
-const cancelarConsulta = async (id: string) => {
+const cancelarConsulta = async (id: string | number) => {
   const response = await apiClient.delete(`${CONSULTAS_URI}/${id}`)
+
+  return response.data
+}
+
+const reagendarConsulta = async (id: string | number, data: ReagendarConsultaProps) => {
+  const response = await apiClient.put(`${CONSULTAS_URI}/reagendar/${id}`, data)
+
+  return response.data
+}
+
+const iniciarConsulta = async (id: string | number) => {
+  const response = await apiClient.put(`${CONSULTAS_URI}/comenzar-cita/${id}`)
 
   return response.data
 }
@@ -56,4 +68,6 @@ const cancelarConsulta = async (id: string) => {
 export default {
   getConsultas,
   cancelarConsulta,
+  reagendarConsulta,
+  iniciarConsulta,
 }

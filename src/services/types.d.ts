@@ -27,3 +27,9 @@ export interface GetConsultasProps {
   limit?: number,
   status?: number | null
 }
+
+export interface ReagendarConsultaProps {
+  fecha: Date
+  horaInicio: Date
+  horaFin: Date
+}

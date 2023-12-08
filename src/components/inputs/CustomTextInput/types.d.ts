@@ -11,4 +11,5 @@ export type CustomTextInputProps = {
   value?: string;
   onChangeText?: (text: string) => void;
   onBlur?: any;
+  disabled?: boolean;
 }

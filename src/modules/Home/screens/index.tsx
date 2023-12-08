@@ -14,7 +14,7 @@ import ListContainer from '@components/ListContainer';
 
 const HomeScreen = () => {
   const { colors } = useTheme();
-  const { consultas, isLoading } = useHome();
+  const { consultas, isLoading, refetch } = useHome();
   const navigation = useNavigation<HomeScreenNavigation>();
 
   return (
@@ -53,7 +53,7 @@ const HomeScreen = () => {
         <View style={{ marginVertical: 20 }}>
           <Text style={styles.citasText}>Proximas citas</Text>
         </View>
-        <ListContainer isLoading={isLoading}>
+        <ListContainer isLoading={isLoading} isEmpty={consultas.length <= 0} refetch={refetch}>
           <CitaList consultas={consultas} />
         </ListContainer>
         <View style={{ height: 50 }}></View>

@@ -5,8 +5,10 @@ import styles from './styles'
 import { Consulta } from '@models/consulta'
 import moment from 'moment-timezone'
 import { useCitaCard } from './useCitaCard'
-
-const color = "#27B2B3"
+import CancelarModal from './CancelarModal'
+import DataContainer from './DataContainer'
+import ReagendarModal from './ReagendarModal'
+import IniciarCitaModal from './IniciarCitaModal'
 
 type CitaCardProps = {
   consulta?: Consulta
@@ -15,34 +17,41 @@ type CitaCardProps = {
 const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
   if (!consulta) return null
 
-  const { setId } = useCitaCard();
-
-  useEffect(() => {
-    setId(consulta.id);
-  }, [consulta])
-
-  const status = useMemo(() => {
-    if (!consulta) return 'Sin definir'
-    if (consulta.status === 1) return 'Próxima'
-    if (consulta.status === 2) return 'Completada'
-    if (consulta.status === 3) return 'Cancelada'
-    if (consulta.status === 4) return 'Terminada'
-    if (consulta.status === 5) return 'En curso'
-    return 'Sin definir'
-  }, [consulta])
-
-  const dotColor = useMemo(() => {
-    if (!consulta) return color
-    if (consulta.status === 1) return '#aaa'
-    if (consulta.status === 2) return '#1B9A59'
-    if (consulta.status === 3) return '#F44336'
-    if (consulta.status === 4) return '#1B9A59'
-    if (consulta.status === 5) return color
-    return color
-  }, [consulta?.status])
+  const {
+    color,
+    reagendarAction,
+    handleCancelarCita,
+    hideModal,
+    cancelarCita,
+    actionModal,
+    modalVisible,
+    iniciarAction,
+    handleIniciarCita,
+  } = useCitaCard(consulta);
 
   return (
     <View style={styles.container}>
+      <CancelarModal
+        consulta={consulta}
+        action={cancelarCita}
+        hideModal={hideModal}
+        visible={modalVisible && actionModal === 'cancelar'}
+        reagendarAction={reagendarAction}
+        title='Cancelar o reagendar'
+      />
+      <ReagendarModal
+        consulta={consulta}
+        hideModal={hideModal}
+        visible={modalVisible && actionModal === 'reagendar'}
+        title='Reagendar cita'
+      />
+      <IniciarCitaModal
+        action={handleIniciarCita}
+        consulta={consulta}
+        hideModal={hideModal}
+        visible={modalVisible && actionModal === 'iniciar'}
+        title='Iniciar cita'
+      />
       <View style={styles.titleContainer}>
         <View>
           <Text style={styles.title}>{consulta?.especialidad.nombre ?? 'Sin definir'}</Text>
@@ -54,34 +63,18 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
           color={color}
         />
       </View>
-      <View style={styles.dataContainer}>
-        <View style={styles.dataTextContainer}>
-          <Ionicons name="calendar" size={20} color={color} />
-          <Text style={styles.dataText}>{moment(consulta?.fecha).format('DD/MM/YYYY')}</Text>
-        </View>
-        <View style={styles.dataTextContainer}>
-          <MaterialCommunityIcons name="clock" size={20} color={color} />
-          <Text style={styles.dataText}>{moment(consulta?.horaInicio).format('hh:mm A')}</Text>
-        </View>
-        <View style={styles.dataTextContainer}>
-          <View style={{ ...styles.dot, backgroundColor: dotColor }} />
-          <Text style={{ 
-            ...styles.dataText,
-            color: dotColor,
-            fontWeight: 'bold',
-           }}>{status}</Text>
-        </View>
-      </View>
+      <DataContainer consulta={consulta} />
       <View style={styles.buttonsContainer}>
         {consulta.status === 1 && (
           <>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={handleCancelarCita}>
               <Text style={styles.buttonText}>Cancelar cita</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{ 
               ...styles.button,
               ...styles.primaryButton,
-            }}>
+            }}
+            onPress={iniciarAction}>
               <Text style={{ 
                 ...styles.buttonText,
                 ...styles.primaryButtonText,
@@ -108,7 +101,7 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
           </TouchableOpacity>
         )}
         {consulta.status === 3 && (
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={reagendarAction}>
             <Text style={styles.buttonText}>Reagendar</Text>
           </TouchableOpacity>
         )}
