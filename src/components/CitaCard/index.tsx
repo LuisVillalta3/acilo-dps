@@ -61,7 +61,7 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
       />
       <View style={styles.titleContainer}>
         <View>
-          <Text style={styles.title}>{consulta?.especialidad.nombre ?? 'Sin definir'}</Text>
+          <Text style={styles.title}>{consulta?.especialidad?.nombre ?? 'Sin definir'}</Text>
           <Text style={styles.drName}>Dr. {consulta?.doctor?.nombre ?? 'Sin definir'}</Text>
         </View>
         <MaterialCommunityIcons
