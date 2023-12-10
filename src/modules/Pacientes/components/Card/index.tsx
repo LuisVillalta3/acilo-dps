@@ -24,20 +24,20 @@ const Card: React.FC<PacienteCardProps> = ({ navigation, paciente }) => {
 
   return (
     <View style={styles.container}>
-      <CalendarModal visible={visible} hideModal={hideModal} />
+      <CalendarModal type='paciente' id={paciente.id} visible={visible} hideModal={hideModal} />
       <View style={styles.titleContainer}>
         <Text style={styles.titleText}>{paciente.nombre}</Text>
         <View style={styles.iconsContainer}>
           <TouchableOpacity onPress={() => navigation.navigate('PacienteScreen', navigationProps)}>
             <AntDesign name="eye" size={24} color={colors.primary} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={showModal}>
+          {/* <TouchableOpacity onPress={showModal}>
             <FontAwesome5
               name="calendar-alt"
               size={24}
               color={colors.primary}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => navigation.navigate('PacienteFormScreen', navigationProps)}>
             <MaterialIcons name="edit" size={24} color={colors.primary} />
           </TouchableOpacity>

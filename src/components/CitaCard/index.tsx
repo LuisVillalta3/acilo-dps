@@ -1,20 +1,15 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React, { useEffect, useMemo } from 'react'
-import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons'
+import React from 'react'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 import styles from './styles'
-import { Consulta } from '@models/consulta'
-import moment from 'moment-timezone'
 import { useCitaCard } from './useCitaCard'
 import CancelarModal from './CancelarModal'
 import DataContainer from './DataContainer'
 import ReagendarModal from './ReagendarModal'
 import IniciarCitaModal from './IniciarCitaModal'
+import { CitaCardProps } from './types'
 
-type CitaCardProps = {
-  consulta?: Consulta
-}
-
-const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
+const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
   if (!consulta) return null
 
   const {
@@ -28,6 +23,10 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
     iniciarAction,
     handleIniciarCita,
   } = useCitaCard(consulta);
+
+  const navigationProps = {
+    consultaId: consulta.id,
+  };
 
   return (
     <View style={styles.container}>
@@ -93,7 +92,8 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta }) => {
           <TouchableOpacity style={{ 
             ...styles.button,
             ...styles.primaryButton,
-          }}>
+          }}
+            onPress={() => navigation.navigate('VerCitaScreen', navigationProps)}>
             <Text style={{ 
               ...styles.buttonText,
               ...styles.primaryButtonText,

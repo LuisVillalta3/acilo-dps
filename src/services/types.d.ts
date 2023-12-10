@@ -33,3 +33,10 @@ export interface ReagendarConsultaProps {
   horaInicio: Date
   horaFin: Date
 }
+
+export interface GetConsultaProps {
+  includeDoctor?: boolean
+  includePaciente?: boolean
+  includeEspecialidad?: boolean
+  includeTipoConsulta?: boolean
+}

@@ -11,9 +11,11 @@ import ListContainer from '@components/ListContainer';
 import styles from '../styles';
 import CheckButton from '../components/CheckButton';
 import { useConsultas } from '../hooks/useConsultas';
+import { ListScreenNavigation } from '../types';
 
 const ConsultasScreen = () => {
   const { consultas, isLoading, refetch, selectedFilter, setSelectedFilter } = useConsultas();
+  const navigation = useNavigation<ListScreenNavigation>();
 
   const handleFilterChange = (value: number | null) => {
     setSelectedFilter(value);
@@ -37,7 +39,7 @@ const ConsultasScreen = () => {
             <RefreshControl refreshing={isLoading} onRefresh={refetch} />
           }
         >
-          {consultas.map((consulta) => <CitaCard key={consulta.id} consulta={consulta} />)}
+          {consultas.map((consulta) => <CitaCard navigation={navigation} key={consulta.id} consulta={consulta} />)}
           <View style={{ height: 10 }} />
         </ScrollView>
       </ListContainer>

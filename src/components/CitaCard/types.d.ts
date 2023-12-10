@@ -19,3 +19,8 @@ export interface CancelarModalProps extends CustomModalProps {
   reagendarAction?: () => void
   consulta: Consulta
 }
+
+type CitaCardProps = {
+  consulta?: Consulta
+  navigation: StackNavigationProp<ScreenStackList, "PacientesScreen">
+}

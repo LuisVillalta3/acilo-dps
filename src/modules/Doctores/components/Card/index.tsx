@@ -24,7 +24,7 @@ const Card: React.FC<DoctorCardProps> = ({ navigation, doctor }) => {
 
   return (
     <View style={styles.container}>
-      <CalendarModal visible={visible} hideModal={hideModal} title='Proximas citas' />
+      <CalendarModal type='doctor' id={doctor.id} visible={visible} hideModal={hideModal} title='Proximas citas' />
       <View style={styles.titleContainer}>
         <View>
           <Text style={styles.titleText}>Dr. {doctor.nombre}</Text>
@@ -39,13 +39,13 @@ const Card: React.FC<DoctorCardProps> = ({ navigation, doctor }) => {
           <TouchableOpacity onPress={() => navigation.navigate('DoctorScreen', navigationProps)}>
             <AntDesign name="eye" size={24} color={colors.primary} />
           </TouchableOpacity>
-          <TouchableOpacity onPress={showModal}>
+          {/* <TouchableOpacity onPress={showModal}>
             <FontAwesome5
               name="calendar-alt"
               size={24}
               color={colors.primary}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity onPress={() => navigation.navigate('DoctorFormScreen', navigationProps)}>
             <MaterialIcons name="edit" size={24} color={colors.primary} />
           </TouchableOpacity>

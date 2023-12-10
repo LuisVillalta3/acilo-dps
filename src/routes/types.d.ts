@@ -15,4 +15,5 @@ export type ScreenStackList = {
   MiPerfilScreen: undefined
   CambiarContrasenaScreen: undefined
   ConsultasScreen: undefined
+  VerCitaScreen: undefined
 };

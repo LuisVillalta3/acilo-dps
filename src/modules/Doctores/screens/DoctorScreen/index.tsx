@@ -13,7 +13,7 @@ import { useDoctor } from '../../hooks/useDoctor';
 import ListContainer from '@components/ListContainer';
 
 const PacienteScreen = () => {
-  const { colors, doctor, isLoading } = useDoctor()
+  const { colors, doctor, isLoading, consultaIsLoading, consultas, refetchConsulta } = useDoctor()
 
   return (
     <ViewContainer>
@@ -58,7 +58,9 @@ const PacienteScreen = () => {
           <View style={{ marginVertical: 20 }}>
             <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Historial de citas</Text>
           </View>
-          <CitaList />
+          <ListContainer isLoading={consultaIsLoading} isEmpty={consultas.length <= 0} refetch={refetchConsulta}>
+            <CitaList consultas={consultas} />
+          </ListContainer>
           <EmptySpace height={40} />
         </ScrollView>
       </ListContainer>

@@ -51,7 +51,7 @@ const HomeScreen = () => {
           </View>
         </View>
         <View style={{ marginVertical: 20 }}>
-          <Text style={styles.citasText}>Proximas citas</Text>
+          <Text style={styles.citasText}>Citas actuales</Text>
         </View>
         <ListContainer isLoading={isLoading} isEmpty={consultas.length <= 0} refetch={refetch}>
           <CitaList consultas={consultas} />

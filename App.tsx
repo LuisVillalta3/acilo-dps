@@ -16,6 +16,7 @@ import SplashScreen from 'react-native-splash-screen';
 import LoginScreen from '@modules/Login/screens';
 import { useAuthStore } from './src/stores/useAuthStore';
 import { AuthStore } from './src/stores/types';
+import VerCitaScreen from '@modules/Consultas/screens/VerCita';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
 
@@ -60,6 +61,10 @@ export default function App() {
               <Stack.Screen
                 name="DoctorScreen"
                 component={DoctorScreen}
+              />
+              <Stack.Screen
+                name="VerCitaScreen"
+                component={VerCitaScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

@@ -1,5 +1,5 @@
 import { apiClient } from "../utils/ApiClient"
-import { GetConsultasProps, ReagendarConsultaProps } from "./types"
+import { GetConsultaProps, GetConsultasProps, ReagendarConsultaProps } from "./types"
 
 const CONSULTAS_URI = '/consultas'
 
@@ -65,9 +65,49 @@ const iniciarConsulta = async (id: string | number) => {
   return response.data
 }
 
+const getConsulta = async (id: string | number, props?: GetConsultaProps) => {
+  const { includeDoctor, includeEspecialidad, includePaciente, includeTipoConsulta } = props || {}
+  const query = []
+
+  if (includeDoctor) {
+    query.push('includeDoctor=true')
+  }
+
+  if (includeEspecialidad) {
+    query.push('includeEspecialidad=true')
+  }
+
+  if (includePaciente) {
+    query.push('includePaciente=true')
+  }
+
+  if (includeTipoConsulta) {
+    query.push('includeTipoConsulta=true')
+  }
+
+  const response = await apiClient.get(`${CONSULTAS_URI}/${id}?${query.join('&')}`)
+
+  return response.data
+}
+
+const getConsultaByPaciente = async (pacienteId: string | number) => {
+  const response = await apiClient.get(`${CONSULTAS_URI}/get-by-paciente/${pacienteId}`)
+
+  return response.data
+}
+
+const getConsultaByDoctor = async (doctorId: string | number) => {
+  const response = await apiClient.get(`${CONSULTAS_URI}/get-by-doctor/${doctorId}`)
+
+  return response.data
+}
+
 export default {
   getConsultas,
   cancelarConsulta,
   reagendarConsulta,
   iniciarConsulta,
+  getConsulta,
+  getConsultaByPaciente,
+  getConsultaByDoctor,
 }

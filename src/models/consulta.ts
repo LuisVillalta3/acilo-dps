@@ -1,5 +1,6 @@
 import { Especialidad } from "./Especialidad";
 import { Doctor } from "./doctor";
+import { Paciente } from "./paciente";
 import { Timestamps } from "./timestamps";
 
 export interface Consulta extends Timestamps {
@@ -17,5 +18,5 @@ export interface Consulta extends Timestamps {
   doctor:         Doctor;
   especialidad:   Especialidad;
   tipoCita:       Especialidad;
-  paciente:       Doctor;
+  paciente:       Paciente;
 }

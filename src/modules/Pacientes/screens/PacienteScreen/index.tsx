@@ -15,7 +15,7 @@ import { getEdad } from '@utils/functions';
 import moment from 'moment-timezone';
 
 const PacienteScreen = () => {
-  const { colors, paciente, isLoading } = usePaciente()
+  const { colors, paciente, isLoading, consultaIsLoading, consultas, refetchConsulta } = usePaciente()
 
   return (
     <ViewContainer>
@@ -72,7 +72,9 @@ const PacienteScreen = () => {
           <View style={{ marginVertical: 20 }}>
             <Text style={{ fontSize: 24, fontWeight: 'bold' }}>Historial de citas</Text>
           </View>
-          <CitaList />
+          <ListContainer isLoading={consultaIsLoading} isEmpty={consultas.length <= 0} refetch={refetchConsulta}>
+            <CitaList consultas={consultas} />
+          </ListContainer>
           <EmptySpace height={40} />
         </ScrollView>
       </ListContainer>

@@ -7,6 +7,8 @@ import { Doctor } from "@models/Doctor";
 import { Horario } from "@models/horario";
 import Toast from "react-native-toast-message";
 import { sortHorariosByDays } from "@utils/functions";
+import consultasService from "@services/consultas.service";
+import { Consulta } from "@models/consulta";
 
 export const useDoctor = () => {
   const route = useRoute<RouteProp<DoctorRouteProps>>();
@@ -15,6 +17,7 @@ export const useDoctor = () => {
   const { colors } = useTheme();
   const [doctor, setDoctor] = useState<Doctor>();
   const [newHorarios, setNewHorarios] = useState<Horario[]>([]);
+  const [consultas, setConsultas] = useState<Consulta[]>([]);
 
   useEffect(() => {
     if (route.params === undefined) return;
@@ -30,12 +33,25 @@ export const useDoctor = () => {
     refetchOnReconnect: true,
   })
 
+  const { data: consultaData, status: consultaStatus, isLoading: consultaIsLoading, refetch: refetchConsulta } = useQuery({
+    queryKey: ['getConsultas', id],
+    queryFn: () => consultasService.getConsultaByPaciente(id),
+    refetchOnWindowFocus: true,
+    refetchOnReconnect: true,
+  })
+
   useEffect(() => {
     if (status === 'success' && data !== null) {
       setDoctor(data as Doctor);
       setNewHorarios(sortHorariosByDays(data?.horarios as Horario[]) || []);
     }
   }, [status, data])
+
+  useEffect(() => {
+    if (consultaStatus === 'success' && consultaData !== null) {
+      setConsultas(consultaData as Consulta[]);
+    }
+  }, [consultaStatus, consultaData])
 
   const saveHorarios = async () => {
     if (id.length === 0) return null;
@@ -74,5 +90,8 @@ export const useDoctor = () => {
     newHorarios,
     setNewHorarios,
     saveHorarios,
+    consultas,
+    consultaIsLoading,
+    refetchConsulta,
   }
 }
