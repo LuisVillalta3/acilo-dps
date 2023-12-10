@@ -8,6 +8,7 @@ import DataContainer from './DataContainer'
 import ReagendarModal from './ReagendarModal'
 import IniciarCitaModal from './IniciarCitaModal'
 import { CitaCardProps } from './types'
+import AgendarProxima from './AgendarProximaModal'
 
 const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
   if (!consulta) return null
@@ -22,6 +23,7 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
     modalVisible,
     iniciarAction,
     handleIniciarCita,
+    agendarProximaAction,
   } = useCitaCard(consulta);
 
   const navigationProps = {
@@ -43,6 +45,12 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
         hideModal={hideModal}
         visible={modalVisible && actionModal === 'reagendar'}
         title='Reagendar cita'
+      />
+      <AgendarProxima
+        consulta={consulta}
+        hideModal={hideModal}
+        visible={modalVisible && actionModal === 'agendarNueva'}
+        title='Agendar proxima cita'
       />
       <IniciarCitaModal
         action={handleIniciarCita}
@@ -81,9 +89,9 @@ const CitaCard: React.FC<CitaCardProps> = ({ consulta, navigation }) => {
             </TouchableOpacity>
           </>
         )}
-        {consulta.status === 2 && (
+        {consulta.status === 2 && !consulta.reagendada && (
           <>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button} onPress={agendarProximaAction}>
               <Text style={styles.buttonText}>Agendar proxima</Text>
             </TouchableOpacity>
           </>

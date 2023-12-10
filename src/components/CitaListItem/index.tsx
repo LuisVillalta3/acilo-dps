@@ -4,17 +4,24 @@ import styles from './styles'
 import { CitaListItemProps } from './types'
 import { useTheme } from 'react-native-paper'
 import { AntDesign } from '@expo/vector-icons';
+import { SettingsScreenNavigation } from '@modules/Settings/types'
+import { useNavigation } from '@react-navigation/native'
 
 const CitaListItem = ({ consulta }: CitaListItemProps) => {
   if (!consulta) return null;
+  const navigation = useNavigation<SettingsScreenNavigation>();
 
   const { colors } = useTheme();
 
   const inProgress = useMemo(() => consulta.status === 5, [consulta])
 
+  const navigationProps = {
+    consultaId: consulta.id,
+  };
+
   return (
     <TouchableOpacity
-      onPress={() => {}}
+      onPress={() => navigation.navigate('VerCitaScreen', navigationProps)}
       style={[styles.container, { backgroundColor: inProgress ? colors.primary : "#fff"  }]}
     >
       <View style={styles.citaContainer}>

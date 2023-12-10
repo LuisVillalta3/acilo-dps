@@ -8,3 +8,12 @@ export type ConsultaRouteProps = {
     consultaId?: string
   }
 }
+
+export type PostCitaProps = {
+  idEspecialidad: string | number
+  idDoctor: string | number
+  idPaciente: string | number
+  fecha: Date
+  horaInicio: Date
+  horaFin: Date
+}

@@ -19,4 +19,5 @@ export interface Consulta extends Timestamps {
   especialidad:   Especialidad;
   tipoCita:       Especialidad;
   paciente:       Paciente;
+  reagendada?:     boolean;
 }

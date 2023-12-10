@@ -45,7 +45,7 @@ const ConsultasScreen = () => {
       </ListContainer>
       <FabButton
         icon="plus"
-        onPress={() => {}}
+        onPress={() => navigation.navigate('CitaFormScreen')}
       />
     </ViewContainer>
   );

@@ -16,4 +16,5 @@ export type ScreenStackList = {
   CambiarContrasenaScreen: undefined
   ConsultasScreen: undefined
   VerCitaScreen: undefined
+  CitaFormScreen: undefined
 };

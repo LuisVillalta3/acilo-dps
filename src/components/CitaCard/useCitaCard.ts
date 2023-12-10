@@ -6,7 +6,7 @@ import { useCallback, useMemo, useState } from "react"
 
 export const useCitaCard = (consulta: Consulta) => {
   const [modalVisible, setModalVisible] = useState(false)
-  const [actionModal, setActionModal] = useState<"none" | "cancelar" | "iniciar" | "reagendar">()
+  const [actionModal, setActionModal] = useState<"none" | "cancelar" | "iniciar" | "reagendar" | "agendarNueva">()
 
   const { refetch: refetchConsultas } = useConsultas()
   const color = "#27B2B3"
@@ -41,6 +41,11 @@ export const useCitaCard = (consulta: Consulta) => {
 
   const reagendarAction = useCallback(() => {
     setActionModal('reagendar')
+    showModal()
+  }, [])
+
+  const agendarProximaAction = useCallback(() => {
+    setActionModal('agendarNueva')
     showModal()
   }, [])
 
@@ -88,5 +93,6 @@ export const useCitaCard = (consulta: Consulta) => {
     reagendarAction,
     iniciarAction,
     handleIniciarCita,
+    agendarProximaAction,
   }
 }

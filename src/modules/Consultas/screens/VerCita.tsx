@@ -12,9 +12,11 @@ import { AntDesign, FontAwesome5, Ionicons, MaterialCommunityIcons } from '@expo
 import { useTheme } from 'react-native-paper'
 import CustomTextInput from '@components/inputs/CustomTextInput'
 import DoctorCard from '../components/DoctorCard'
+import CitaList from '@components/CitaList'
+import CustomModal from '@components/CustomModal'
 
 const VerCita = () => {
-  const { consulta, isLoading, navigation } = useConsulta()
+  const { consulta, isLoading, navigation, historialConsultas, consultasIsLoading, notas, setNotas, hideModal, modalVisible, showModal, handleCompletarCita } = useConsulta()
   const { colors } = useTheme()
 
   if (!consulta) return null
@@ -75,22 +77,59 @@ const VerCita = () => {
               <Text style={{ color: '#828282', fontSize: 12 }}>Tipo consulta</Text>
               <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Consulta general</Text>
             </View>
-            <CustomTextInput
-              label='Notas'
-              mode='outlined'
-              numberOfLines={10}
-            />
+            {consulta.status !== 5 && (
+              <Text style={{ paddingVertical: 10 }}>{notas}</Text>
+            )}
+            {consulta.status === 5 && (
+              <CustomTextInput
+                label='Notas'
+                mode='outlined'
+                numberOfLines={5}
+                multiline={true}
+                onChangeText={(text) => setNotas(text)}
+                value={notas}
+              />
+            )}
           </View>
           <EmptySpace height={20} />
-          {/* <ListContainer isLoading={false} isEmpty={false}>
+          <ListContainer isLoading={false} isEmpty={false}>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Historial médico</Text>
             <Text style={{ color: '#828282', fontSize: 12 }}>Consultas previas</Text>
-          </ListContainer> */}
-          <TouchableOpacity onPress={() => {}} style={{ backgroundColor: colors.primary, borderRadius: 5, padding: 10, elevation: 1 }}>
-            <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold' }}>Finalizar cita</Text>
-          </TouchableOpacity>
+          </ListContainer>
+          <ListContainer isLoading={consultasIsLoading} isEmpty={historialConsultas.length <= 0}>
+            <CitaList consultas={historialConsultas} />
+          </ListContainer>
           <EmptySpace height={40} />
         </ScrollView>
+        <EmptySpace height={40} />
+        {consulta.status === 5 && (
+          <>
+            <TouchableOpacity
+              onPress={showModal}
+              style={{ backgroundColor: colors.primary, borderRadius: 5, padding: 10, elevation: 1, position: 'absolute', bottom: 20, left: 20, right: 20 }}
+            >
+              <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold' }}>Finalizar cita</Text>
+            </TouchableOpacity>
+            <CustomModal visible={modalVisible} hideModal={hideModal} title='Finalizar consulta'>
+              <View>
+                <DataContainer consulta={consulta} />
+                <Text style={{ paddingVertical: 10, color: '#666' }}>Una vez finalizada la cita no se podra agregar o editar las notas, ¿esta seguro de finalizar la consulta?</Text>
+                <TouchableOpacity
+                  onPress={handleCompletarCita}
+                  style={{ backgroundColor: colors.primary, borderRadius: 5, padding: 10, elevation: 1 }}
+                >
+                  <Text style={{ textAlign: 'center', color: '#fff', fontWeight: 'bold' }}>Finalizar cita</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={hideModal}
+                  style={{ paddingVertical: 10 }}
+                >
+                  <Text style={{ textAlign: 'center', color: '#666', fontWeight: 'bold' }}>Cancelar</Text>
+                </TouchableOpacity>
+              </View>
+            </CustomModal>
+          </>
+        )}
       </ListContainer>
     </ViewContainer>
   )

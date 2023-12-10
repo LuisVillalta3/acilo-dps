@@ -17,6 +17,7 @@ import LoginScreen from '@modules/Login/screens';
 import { useAuthStore } from './src/stores/useAuthStore';
 import { AuthStore } from './src/stores/types';
 import VerCitaScreen from '@modules/Consultas/screens/VerCita';
+import CitaFormScreen from '@modules/Consultas/screens/CitaForm';
 
 const Stack = createNativeStackNavigator<ScreenStackList>();
 
@@ -65,6 +66,10 @@ export default function App() {
               <Stack.Screen
                 name="VerCitaScreen"
                 component={VerCitaScreen}
+              />
+              <Stack.Screen
+                name="CitaFormScreen"
+                component={CitaFormScreen}
               />
             </Stack.Navigator>
           </NavigationContainer>

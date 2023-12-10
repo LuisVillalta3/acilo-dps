@@ -5,7 +5,7 @@ import HomeScreen from '@modules/Home/screens';
 import DoctoresScreen from '@modules/Doctores/screens/ListScreen';
 const Tab = createBottomTabNavigator();
 const { width, height } = Dimensions.get('window');
-import { Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome, Foundation, MaterialCommunityIcons } from '@expo/vector-icons';
 import PacientesScreen from '@modules/Pacientes/screens/ListScreen';
 import { Ionicons } from '@expo/vector-icons';
 import SettingsScreen from '@modules/Settings/screens/settingsScreens';
@@ -67,7 +67,7 @@ const BottomTabNavigator = () => {
           component={SettingsScreen}
           options={{
             tabBarIcon: ({ color }) => (
-              <Ionicons name="settings" size={30} color={color} />
+              <FontAwesome name="power-off" size={30} color={color} />
             )
           }}
         />

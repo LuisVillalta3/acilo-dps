@@ -43,20 +43,6 @@ export const useReagendar = (consulta: Consulta) => {
     });
   };
 
-  const handleReagendar = async () => {
-    try {
-      await consultasService.reagendarConsulta(consulta.id, {
-        fecha: moment(dia).toDate(),
-        horaInicio: moment(startHour).toDate(),
-        horaFin: moment(endHour).toDate(),
-      })
-      showToast('Consulta reagendada correctamente.', 'La consulta ha sido reagendada correctamente.')
-      refetch()
-    } catch (error) {
-      showToast('Ha ocurrido un error al reagendar la consulta.', 'Por favor, intenta de nuevo.', "error")
-    }
-  }
-
   const handleAgendarProxima = async () => {
     try {
       await consultasService.agendarProximaConsulta(consulta.id, {
@@ -80,6 +66,5 @@ export const useReagendar = (consulta: Consulta) => {
     showDatepicker,
     dia,
     setDia,
-    handleReagendar,
   }
 }

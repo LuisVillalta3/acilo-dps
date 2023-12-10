@@ -59,8 +59,20 @@ const reagendarConsulta = async (id: string | number, data: ReagendarConsultaPro
   return response.data
 }
 
+const agendarProximaConsulta = async (id: string | number, data: ReagendarConsultaProps) => {
+  const response = await apiClient.post(`${CONSULTAS_URI}/agendar-consulta/${id}`, data)
+
+  return response.data
+}
+
 const iniciarConsulta = async (id: string | number) => {
   const response = await apiClient.put(`${CONSULTAS_URI}/comenzar-cita/${id}`)
+
+  return response.data
+}
+
+const completarCita = async (id: string | number, notas: string) => {
+  const response = await apiClient.put(`${CONSULTAS_URI}/completar-cita/${id}`, { notas })
 
   return response.data
 }
@@ -102,12 +114,43 @@ const getConsultaByDoctor = async (doctorId: string | number) => {
   return response.data
 }
 
+const getConsultasByPacienteAndEspecialidad = async (pacienteId?: string | number, especialidadId?: string | number, excludeConsulta?: string | number) => {
+  if (!pacienteId || !especialidadId) return Promise.resolve([])
+
+  const query = []
+
+  if (excludeConsulta) {
+    query.push(`excludeConsulta=${excludeConsulta}`)
+  }
+
+  const response = await apiClient.get(`${CONSULTAS_URI}/get-by-paciente-and-especialidad/${pacienteId}/${especialidadId}?${query.join('&')}`)
+
+  return response.data
+}
+
+const getTipoConsultas = async () => {
+  const response = await apiClient.get('/tipo-citas')
+
+  return response.data
+}
+
+const postConsulta = async (data: any) => {
+  const response = await apiClient.post(`${CONSULTAS_URI}`, data)
+
+  return response.data
+}
+
 export default {
+  postConsulta,
+  getTipoConsultas,
   getConsultas,
   cancelarConsulta,
   reagendarConsulta,
+  agendarProximaConsulta,
   iniciarConsulta,
+  completarCita,
   getConsulta,
   getConsultaByPaciente,
   getConsultaByDoctor,
+  getConsultasByPacienteAndEspecialidad,
 }
